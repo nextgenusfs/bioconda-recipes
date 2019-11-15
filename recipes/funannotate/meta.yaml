@@ -1,0 +1,112 @@
+{% set name = "funannotate" %}
+{% set version = "1.7.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: "a4e604820878f8b66fb3c77b2dd96f7397a571890e083d533798c4050b6bf348"
+
+build:
+  number: 0
+  noarch: "python"
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  host:
+    - biopython
+    - goatools
+    - matplotlib
+    - natsort
+    - numpy
+    - pandas
+    - pip
+    - psutil
+    - python  <3
+    - requests
+    - scikit-learn
+    - scipy
+    - seaborn
+  run:
+    - biopython
+    - goatools
+    - matplotlib
+    - natsort
+    - numpy
+    - pandas
+    - psutil
+    - python  <3
+    - requests
+    - scikit-learn
+    - scipy
+    - seaborn
+    - blast ==2.2.31
+    - tantan
+    - bedtools
+    - hmmer
+    - exonerate
+    - diamond =<0.9.24
+    - tbl2asn
+    - ucsc-pslcdnafilter
+    - pasa >=2.3
+    - raxml
+    - trimal
+    - mafft >=7
+    - iqtree
+    - kallisto
+    - bowtie2
+    - minimap2
+    - evidencemodeler
+    - codingquarry
+    - stringtie
+    - snap
+    - glimmerhmm
+    - augustus # [linux]
+    - salmon >=0.9
+    - trinity ==2.8.5 # [linux]
+    - trnascan-se
+    - hisat2
+    - proteinortho >=6.0.9
+    - jellyfish >=2.2
+    - ete3
+    - perl
+    - perl-db-file
+    - perl-bioperl
+    - perl-dbd-mysql
+    - perl-dbd-sqlite
+    - perl-text-soundex
+    - perl-scalar-util-numeric
+    - perl-data-dumper
+    - perl-dbi
+    - perl-clone
+    - perl-json
+    - perl-logger-simple
+    - perl-hash-merge
+    - perl-yaml
+    - perl-pod-usage
+    - perl-getopt-long
+    - perl-parallel-forkmanager
+    - perl-carp
+    - perl-soap-lite
+    - perl-class-inspector
+    
+
+test:
+  imports:
+    - funannotate
+  commands:
+    - "funannotate --version 2>&1 | grep \"funannotate v1.7.0\""
+
+about:
+  home: "https://github.com/nextgenusfs/funannotate"
+  license: "BSD-2"
+  license_family: "BSD"
+  license_file: LICENSE.md
+  summary: "funannotate: eukaryotic genome annotation pipeline"
+  doc_url: "funannotate.readthedocs.io"
+
+extra:
+  recipe-maintainers:
+    - nextgenusfs
